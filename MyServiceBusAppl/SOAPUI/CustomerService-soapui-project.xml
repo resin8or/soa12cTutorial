@@ -1,0 +1,474 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="abbec79a-74d4-45c7-902c-87fdb6b284c6" activeEnvironment="Default" name="CustomerService" resourceRoot="" soapui-version="5.2.1" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="20b37629-a88d-46ce-995e-2cde913ac0ed" wsaVersion="NONE" name="customer_service_binding" type="wsdl" bindingName="{urn:xyzbank:cust:wsdl:customer}customer_service_binding" soapVersion="1_1" anonymous="optional" definition="file:/C:/workspaces/soa12Book/ServiceBusAppl/XYZCommon/CustomerService.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:\C:\workspaces\soa12Book\ServiceBusAppl\XYZCommon\CustomerService.wsdl"><con:part><con:url>file:\C:\workspaces\soa12Book\ServiceBusAppl\XYZCommon\CustomerService.wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="CustomerEntityService" targetNamespace="urn:xyzbank:cust:wsdl:customer" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:n2="urn:xyzbank:cust:schema:customer" xmlns:n3="urn:xyzbank:cust:wsdl:customer" xmlns:n4="http://schemas.xmlsoap.org/wsdl/soap/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="urn:xyzbank:cust:schema:customer" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:xyzbank:cust:schema:customer">
+      <xsd:complexType name="customer_input">
+        <xsd:sequence>
+          <xsd:element name="customer_id" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="full_name" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="customer_type" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="date_of_birth" type="xsd:date" minOccurs="0"/>
+          <xsd:element name="email" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="phone" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="addr_line1" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="addr_line2" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="addr_line3" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="addr_line4" type="xsd:string" minOccurs="0"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="migrated_customer">
+        <xsd:sequence>
+          <xsd:element name="customer_id" type="xsd:string"/>
+          <xsd:element name="full_name" type="xsd:string"/>
+          <xsd:element name="date_of_birth" type="xsd:date"/>
+          <xsd:element name="email" type="xsd:string"/>
+          <xsd:element name="phone" type="xsd:string"/>
+          <xsd:element name="addr_line1" type="xsd:string"/>
+          <xsd:element name="addr_line2" type="xsd:string"/>
+          <xsd:element name="addr_line3" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="addr_line4" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="customer_accounts" type="tns:accounts" minOccurs="0"/>
+          <xsd:element name="customer_orders" type="tns:orders" minOccurs="0"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="customer_account">
+        <xsd:sequence>
+          <xsd:element name="account_id" type="xsd:long"/>
+          <xsd:element name="account_type" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+          <xsd:element name="account_name" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+          <xsd:element name="description" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+          <xsd:element name="investor_type" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+          <xsd:element name="start_date" type="xsd:date" minOccurs="0" maxOccurs="1"/>
+          <xsd:element name="brokerage_code" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+          <xsd:element name="rebate_code" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+          <xsd:element name="trading_limit" type="xsd:double" minOccurs="0" maxOccurs="1"/>
+          <xsd:element name="credit_limit" type="xsd:double" minOccurs="0" maxOccurs="1"/>
+          <xsd:element name="account_status" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+          <xsd:element name="registration_details" type="tns:account_registration_details" minOccurs="0"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="account_registration_details">
+        <xsd:sequence>
+          <xsd:element name="market_id" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+          <xsd:element name="instrument_code" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+          <xsd:element name="description" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+          <xsd:element name="registration_details1" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+          <xsd:element name="postal_code" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+          <xsd:element name="country_code" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="accounts">
+        <xsd:sequence>
+          <xsd:element name="account" type="tns:customer_account" minOccurs="1" maxOccurs="unbounded"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="customer_order">
+        <xsd:sequence>
+          <xsd:element name="account_id" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+          <xsd:element name="instrument_code" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+          <xsd:element name="order_action" type="xsd:double" minOccurs="1" maxOccurs="1"/>
+          <xsd:element name="price" type="xsd:double" minOccurs="1" maxOccurs="1"/>
+          <xsd:element name="currency_code" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+          <xsd:element name="quantity" type="xsd:double" minOccurs="0" maxOccurs="1"/>
+          <xsd:element name="date_created" type="xsd:date" minOccurs="1" maxOccurs="1"/>
+          <xsd:element name="brokerage_amount" type="xsd:double" minOccurs="0" maxOccurs="1"/>
+          <xsd:element name="brokerage_code" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+          <xsd:element name="brokerage_perc" type="xsd:double" minOccurs="0" maxOccurs="1"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="orders">
+        <xsd:sequence>
+          <xsd:element name="order" type="tns:customer_order" minOccurs="1" maxOccurs="unbounded"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="customerid_input">
+        <xsd:sequence>
+          <xsd:element name="customer_id" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="customerid_output">
+        <xsd:sequence>
+          <xsd:element name="CustomerExists" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="response_msg">
+        <xsd:sequence>
+          <xsd:element name="customer_id" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="status" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="error_message" minOccurs="0" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="error_msg">
+        <xsd:sequence>
+          <xsd:element name="error_code" type="xsd:string"/>
+          <xsd:element name="error_message" minOccurs="0" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="customer" type="tns:customer_input"/>
+      <xsd:element name="migrated_customer" type="tns:migrated_customer"/>
+      <xsd:element name="status_msg" type="tns:response_msg"/>
+      <xsd:element name="fault_msg" type="tns:error_msg"/>
+      <xsd:element name="customerid_input" type="tns:customerid_input"/>
+      <xsd:element name="customerid_output" type="tns:customerid_output"/>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="create_customer_req">
+    <wsdl:part name="payload" element="n2:customer"/>
+  </wsdl:message>
+  <wsdl:message name="create_customer_resp">
+    <wsdl:part name="payload" element="n2:status_msg"/>
+  </wsdl:message>
+  <wsdl:message name="update_customer_req">
+    <wsdl:part name="payload" element="n2:customer"/>
+  </wsdl:message>
+  <wsdl:message name="update_customer_resp">
+    <wsdl:part name="payload" element="n2:status_msg"/>
+  </wsdl:message>
+  <wsdl:message name="delete_customer_req">
+    <wsdl:part name="payload" element="n2:customerid_input"/>
+  </wsdl:message>
+  <wsdl:message name="delete_customer_resp">
+    <wsdl:part name="payload" element="n2:status_msg"/>
+  </wsdl:message>
+  <wsdl:message name="migrate_customer_req">
+    <wsdl:part name="payload" element="n2:migrated_customer"/>
+  </wsdl:message>
+  <wsdl:message name="migrate_customer_resp">
+    <wsdl:part name="payload" element="n2:status_msg"/>
+  </wsdl:message>
+  <wsdl:message name="find_customer_req">
+    <wsdl:part name="payload" element="n2:customerid_input"/>
+  </wsdl:message>
+  <wsdl:message name="find_customer_resp">
+    <wsdl:part name="payload" element="n2:customerid_output"/>
+  </wsdl:message>
+  <wsdl:message name="get_customer_req">
+    <wsdl:part name="payload" element="n2:customerid_input"/>
+  </wsdl:message>
+  <wsdl:message name="get_customer_resp">
+    <wsdl:part name="payload" element="n2:customer"/>
+  </wsdl:message>
+  <wsdl:message name="get_customer_fault">
+    <wsdl:part name="payload" element="n2:fault_msg"/>
+  </wsdl:message>
+  <wsdl:portType name="customer_service_port">
+    <wsdl:operation name="create_customer">
+      <wsdl:input message="n3:create_customer_req"/>
+      <wsdl:output message="n3:create_customer_resp"/>
+    </wsdl:operation>
+    <wsdl:operation name="update_customer">
+      <wsdl:input message="n3:update_customer_req"/>
+      <wsdl:output message="n3:update_customer_resp"/>
+    </wsdl:operation>
+    <wsdl:operation name="delete_customer">
+      <wsdl:input message="n3:delete_customer_req"/>
+      <wsdl:output message="n3:delete_customer_resp"/>
+    </wsdl:operation>
+    <wsdl:operation name="migrate_customer">
+      <wsdl:input message="n3:migrate_customer_req"/>
+      <wsdl:output message="n3:migrate_customer_resp"/>
+    </wsdl:operation>
+    <wsdl:operation name="find_customer">
+      <wsdl:input message="n3:find_customer_req"/>
+      <wsdl:output message="n3:find_customer_resp"/>
+    </wsdl:operation>
+    <wsdl:operation name="get_customer">
+      <wsdl:input message="n3:get_customer_req"/>
+      <wsdl:output message="n3:get_customer_resp"/>
+      <wsdl:fault name="fault_msg" message="n3:get_customer_fault"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="customer_service_binding" type="n3:customer_service_port">
+    <n4:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="create_customer">
+      <n4:operation soapAction="create_customer" style="document"/>
+      <wsdl:input>
+        <n4:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <n4:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="update_customer">
+      <n4:operation soapAction="update_customer" style="document"/>
+      <wsdl:input>
+        <n4:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <n4:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="delete_customer">
+      <n4:operation soapAction="delete_customer" style="document"/>
+      <wsdl:input>
+        <n4:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <n4:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="migrate_customer">
+      <n4:operation soapAction="migrate_customer" style="document"/>
+      <wsdl:input>
+        <n4:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <n4:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="find_customer">
+      <n4:operation soapAction="find_customer" style="document"/>
+      <wsdl:input>
+        <n4:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <n4:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_customer">
+      <n4:operation soapAction="get_customer" style="document"/>
+      <wsdl:input>
+        <n4:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <n4:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="fault_msg">
+        <n4:fault name="fault_msg" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://Jamie-PC:8088/mockcustomer_service_binding</con:endpoint><con:endpoint>http://localhost:8088/CustomerService</con:endpoint></con:endpoints><con:operation id="ab7fefc5-5901-4767-bafb-05c7900ec9cb" isOneWay="false" action="create_customer" name="create_customer" bindingOperationName="create_customer" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="abafa775-0dda-44d5-9035-b93e2cb045a8" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8088/CustomerService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:xyzbank:cust:schema:customer">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <urn:customer>\r
+         <!--Optional:-->\r
+         <customer_id>?</customer_id>\r
+         <!--Optional:-->\r
+         <full_name>?</full_name>\r
+         <!--Optional:-->\r
+         <customer_type>?</customer_type>\r
+         <!--Optional:-->\r
+         <date_of_birth>?</date_of_birth>\r
+         <!--Optional:-->\r
+         <email>?</email>\r
+         <!--Optional:-->\r
+         <phone>?</phone>\r
+         <!--Optional:-->\r
+         <addr_line1>?</addr_line1>\r
+         <!--Optional:-->\r
+         <addr_line2>?</addr_line2>\r
+         <!--Optional:-->\r
+         <addr_line3>?</addr_line3>\r
+         <!--Optional:-->\r
+         <addr_line4>?</addr_line4>\r
+      </urn:customer>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="create_customer"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="a98cdb8f-5f0d-4dfc-91a1-eb14959a3dfd" isOneWay="false" action="delete_customer" name="delete_customer" bindingOperationName="delete_customer" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="09c06bce-3294-48d5-9551-ffc220c22578" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://Jamie-PC:8088/mockcustomer_service_binding</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:xyzbank:cust:schema:customer">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <urn:customerid_input>\r
+         <customer_id>?</customer_id>\r
+      </urn:customerid_input>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="delete_customer"/></con:call></con:operation><con:operation id="840d4ea9-10e5-4fe6-b759-090e792b98ba" isOneWay="false" action="find_customer" name="find_customer" bindingOperationName="find_customer" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="5f0e58a0-4568-47b8-9281-02d3148ec8b6" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8088/CustomerService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:xyzbank:cust:schema:customer">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <urn:customerid_input>\r
+         <customer_id>?</customer_id>\r
+      </urn:customerid_input>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="find_customer"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="ebc0971f-9e1f-4d67-9750-b4de0c3d2003" isOneWay="false" action="get_customer" name="get_customer" bindingOperationName="get_customer" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="bccd555e-bd77-4976-854f-a3acbd529cba" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://Jamie-PC:8088/mockcustomer_service_binding</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:xyzbank:cust:schema:customer">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <urn:customerid_input>\r
+         <customer_id>?</customer_id>\r
+      </urn:customerid_input>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="get_customer"/></con:call></con:operation><con:operation id="3662512b-1c1b-4023-b1bc-2c5dd7a36ae4" isOneWay="false" action="migrate_customer" name="migrate_customer" bindingOperationName="migrate_customer" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="78f4684f-5780-4f82-bb81-b55680d383d1" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8088/CustomerService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:xyzbank:cust:schema:customer">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <urn:migrated_customer>\r
+         <customer_id>?</customer_id>\r
+         <full_name>?</full_name>\r
+         <date_of_birth>?</date_of_birth>\r
+         <email>?</email>\r
+         <phone>?</phone>\r
+         <addr_line1>?</addr_line1>\r
+         <addr_line2>?</addr_line2>\r
+         <!--Optional:-->\r
+         <addr_line3>?</addr_line3>\r
+         <!--Optional:-->\r
+         <addr_line4>?</addr_line4>\r
+         <!--Optional:-->\r
+         <customer_accounts>\r
+            <!--1 or more repetitions:-->\r
+            <account>\r
+               <account_id>?</account_id>\r
+               <!--Optional:-->\r
+               <account_type>?</account_type>\r
+               <!--Optional:-->\r
+               <account_name>?</account_name>\r
+               <!--Optional:-->\r
+               <description>?</description>\r
+               <!--Optional:-->\r
+               <investor_type>?</investor_type>\r
+               <!--Optional:-->\r
+               <start_date>?</start_date>\r
+               <!--Optional:-->\r
+               <brokerage_code>?</brokerage_code>\r
+               <!--Optional:-->\r
+               <rebate_code>?</rebate_code>\r
+               <!--Optional:-->\r
+               <trading_limit>?</trading_limit>\r
+               <!--Optional:-->\r
+               <credit_limit>?</credit_limit>\r
+               <!--Optional:-->\r
+               <account_status>?</account_status>\r
+               <!--Optional:-->\r
+               <registration_details>\r
+                  <!--Optional:-->\r
+                  <market_id>?</market_id>\r
+                  <!--Optional:-->\r
+                  <instrument_code>?</instrument_code>\r
+                  <!--Optional:-->\r
+                  <description>?</description>\r
+                  <!--Optional:-->\r
+                  <registration_details1>?</registration_details1>\r
+                  <!--Optional:-->\r
+                  <postal_code>?</postal_code>\r
+                  <!--Optional:-->\r
+                  <country_code>?</country_code>\r
+               </registration_details>\r
+            </account>\r
+         </customer_accounts>\r
+         <!--Optional:-->\r
+         <customer_orders>\r
+            <!--1 or more repetitions:-->\r
+            <order>\r
+               <account_id>?</account_id>\r
+               <instrument_code>?</instrument_code>\r
+               <order_action>?</order_action>\r
+               <price>?</price>\r
+               <currency_code>?</currency_code>\r
+               <!--Optional:-->\r
+               <quantity>?</quantity>\r
+               <date_created>?</date_created>\r
+               <!--Optional:-->\r
+               <brokerage_amount>?</brokerage_amount>\r
+               <!--Optional:-->\r
+               <brokerage_code>?</brokerage_code>\r
+               <!--Optional:-->\r
+               <brokerage_perc>?</brokerage_perc>\r
+            </order>\r
+         </customer_orders>\r
+      </urn:migrated_customer>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="migrate_customer"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="4bfe7572-6b52-45a7-bb55-37146bd8eeb5" isOneWay="false" action="update_customer" name="update_customer" bindingOperationName="update_customer" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="971cf44d-66ed-4e8a-ab7b-d813505cd0b5" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://Jamie-PC:8088/mockcustomer_service_binding</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:xyzbank:cust:schema:customer">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <urn:customer>\r
+         <!--Optional:-->\r
+         <customer_id>?</customer_id>\r
+         <!--Optional:-->\r
+         <full_name>?</full_name>\r
+         <!--Optional:-->\r
+         <customer_type>?</customer_type>\r
+         <!--Optional:-->\r
+         <date_of_birth>?</date_of_birth>\r
+         <!--Optional:-->\r
+         <email>?</email>\r
+         <!--Optional:-->\r
+         <phone>?</phone>\r
+         <!--Optional:-->\r
+         <addr_line1>?</addr_line1>\r
+         <!--Optional:-->\r
+         <addr_line2>?</addr_line2>\r
+         <!--Optional:-->\r
+         <addr_line3>?</addr_line3>\r
+         <!--Optional:-->\r
+         <addr_line4>?</addr_line4>\r
+      </urn:customer>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="update_customer"/></con:call></con:operation></con:interface><con:mockService id="0583198b-6353-4fc1-a768-00ee831fa093" port="8088" path="/mockcustomer_service_binding" host="Jamie-PC" name="mockCustomerService"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.mock.WsdlMockService@require-soap-action">false</con:setting></con:settings><con:properties/><con:mockOperation name="create_customer" id="5c326306-5548-4cc8-806d-ea09af31c9fb" interface="customer_service_binding" operation="create_customer"><con:settings/><con:defaultResponse>Response 1</con:defaultResponse><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:response name="Response 1" id="eeb9ffba-e6e0-4733-8b5b-36052b70ac53" httpResponseStatus="200" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:xyzbank:cust:schema:customer">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <urn:status_msg>
+         <!--Optional:-->
+         <customer_id>1234</customer_id>
+         <!--Optional:-->
+         <status>DRAFT</status>
+         <!--Optional:-->
+         <error_message>?</error_message>
+      </urn:status_msg>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="create_customer"/></con:response><con:dispatchConfig/></con:mockOperation><con:mockOperation name="delete_customer" id="33782760-0c2c-4654-8ef7-0a7cd7c97394" interface="customer_service_binding" operation="delete_customer"><con:settings/><con:defaultResponse>Response 1</con:defaultResponse><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:response name="Response 1" id="7679df2a-1711-41c5-b8ae-58d280324e1b" httpResponseStatus="200" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:xyzbank:cust:schema:customer">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <urn:status_msg>
+         <!--Optional:-->
+         <customer_id>?</customer_id>
+         <!--Optional:-->
+         <status>?</status>
+         <!--Optional:-->
+         <error_message>?</error_message>
+      </urn:status_msg>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="delete_customer"/></con:response><con:dispatchConfig/></con:mockOperation><con:mockOperation name="find_customer" id="0553a8ef-774d-4de4-8b72-e1aae3880525" interface="customer_service_binding" operation="find_customer"><con:settings/><con:defaultResponse>Response 1</con:defaultResponse><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:response name="Response 1" id="d7f67eef-89d5-4a99-8f86-41a3b40983dc" httpResponseStatus="200" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:xyzbank:cust:schema:customer">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <urn:customerid_output>
+         <CustomerExists>?</CustomerExists>
+      </urn:customerid_output>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="find_customer"/></con:response><con:dispatchConfig/></con:mockOperation><con:mockOperation name="get_customer" id="4a597927-8254-44d3-80e8-b32cb6662705" interface="customer_service_binding" operation="get_customer"><con:settings/><con:defaultResponse>Response 1</con:defaultResponse><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:response name="Response 1" id="fabc99dc-4451-4d76-afe3-349eab36010a" httpResponseStatus="200" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:xyzbank:cust:schema:customer">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <urn:customer>
+         <!--Optional:-->
+         <customer_id>?</customer_id>
+         <!--Optional:-->
+         <full_name>?</full_name>
+         <!--Optional:-->
+         <customer_type>?</customer_type>
+         <!--Optional:-->
+         <date_of_birth>?</date_of_birth>
+         <!--Optional:-->
+         <email>?</email>
+         <!--Optional:-->
+         <phone>?</phone>
+         <!--Optional:-->
+         <addr_line1>?</addr_line1>
+         <!--Optional:-->
+         <addr_line2>?</addr_line2>
+         <!--Optional:-->
+         <addr_line3>?</addr_line3>
+         <!--Optional:-->
+         <addr_line4>?</addr_line4>
+      </urn:customer>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="get_customer"/></con:response><con:dispatchConfig/></con:mockOperation><con:mockOperation name="migrate_customer" id="0ec813df-764f-4858-a240-d025ca3e5467" interface="customer_service_binding" operation="migrate_customer"><con:settings/><con:defaultResponse>Response 1</con:defaultResponse><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:response name="Response 1" id="492fce04-fe57-461b-91f8-5da90d3ab61b" httpResponseStatus="200" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:xyzbank:cust:schema:customer">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <urn:status_msg>
+         <!--Optional:-->
+         <customer_id>?</customer_id>
+         <!--Optional:-->
+         <status>?</status>
+         <!--Optional:-->
+         <error_message>?</error_message>
+      </urn:status_msg>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="migrate_customer"/></con:response><con:dispatchConfig/></con:mockOperation><con:mockOperation name="update_customer" id="e98b5ef1-83ab-4231-b6f2-72ef728584b7" interface="customer_service_binding" operation="update_customer"><con:settings/><con:defaultResponse>Response 1</con:defaultResponse><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:response name="Response 1" id="b697cef1-aec1-411e-bc91-bf5dac95eb5b" httpResponseStatus="200" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:xyzbank:cust:schema:customer">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <urn:status_msg>
+         <!--Optional:-->
+         <customer_id>?</customer_id>
+         <!--Optional:-->
+         <status>?</status>
+         <!--Optional:-->
+         <error_message>?</error_message>
+      </urn:status_msg>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="update_customer"/></con:response><con:dispatchConfig/></con:mockOperation></con:mockService><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/></con:soapui-project>
